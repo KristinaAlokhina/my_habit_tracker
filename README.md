@@ -47,7 +47,7 @@ Für die Ausführung wird lediglich eine installierte Docker-Umgebung benötigt:
    ```bash
    docker run -p 8000:8000 gewohnheits-tracker
    ```
-Die Anwendung ist danach unter `http://localhost:8000/gewohnheiten` erreichbar.
+Die Anwendung ist danach unter `[http://localhost:8000/gewohnheiten](https://my-habit-tracker-ohs1.onrender.com/docs)` erreichbar.
 
 ---
 
@@ -91,4 +91,4 @@ Only a local Docker installation is required to deploy this application:
    ```bash
    docker run -p 8000:8000 gewohnheits-tracker
    ```
-The application will be live at `http://localhost:8000/gewohnheiten`."# my_habit_tracker" 
+The application will be live at `[http://localhost:8000/gewohnheiten](https://my-habit-tracker-ohs1.onrender.com/docs)`."# my_habit_tracker" 
