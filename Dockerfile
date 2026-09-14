@@ -10,8 +10,8 @@ COPY requirements.txt .
 # 4. Notwendige Python-Bibliotheken im Container installieren
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 5. Den Quellcode (main.py) in den Container kopieren
-COPY main.py .
+# 5. Den gesamten Quellcode inklusive Ordner (wie templates/) in den Container kopieren
+COPY . .
 
 # 6. Befehl zum Starten des Servers beim Container-Start festlegen
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
