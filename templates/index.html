@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Habit Tracker</title>
-    
+    <!-- Integration von Bootstrap für ein modernes und sauberes Design -->
     <link href="https://jsdelivr.net" rel="stylesheet">
-    
+    <!-- Integration von Bootstrap Icons für visuelle Elemente (Feuer, Haken) -->
     <link href="https://jsdelivr.net" rel="stylesheet">
     <style>
         body { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -19,36 +19,49 @@
 <body>
 
     <div class="container py-5" style="max-width: 550px;">
-        
+        <!-- Kopfbereich der Webseite -->
         <div class="text-center mb-5">
             <h1 class="fw-bold text-dark"><i class="bi bi-check2-circle text-primary me-2"></i>Habit Tracker</h1>
-            <p class="text-muted">Verfolge deine täglichen Gewohnheiten</p>
+            <p class="text-muted">Verfolge deine täglichen Gewohnheiten einfach und übersichtlich</p>
         </div>
         
-        
+        <!-- Hauptbereich mit den Funktionen -->
         <div class="card p-4 tracker-card bg-white">
-            <h5 class="card-title fw-bold mb-4 text-secondary">Meine Gewohnheiten</h5>
             
+            <!-- Formular zum Hinzufügen einer neuen Gewohnheit -->
+            <h5 class="card-title fw-bold mb-3 text-secondary">Neue Gewohnheit hinzufügen</h5>
+            <form action="/add" method="POST" class="d-flex gap-2 mb-4">
+                <input type="text" name="name" class="form-control form-control-lg bg-light border-0" placeholder="z.B. 2 Liter Wasser trinken..." required>
+                <button type="submit" class="btn btn-primary px-4 fw-bold">Hinzufügen</button>
+            </form>
+
+            <hr class="text-muted my-4">
+
+            <!-- Liste der bestehenden Gewohnheiten -->
+            <h5 class="card-title fw-bold mb-3 text-secondary">Meine aktuellen Gewohnheiten</h5>
             <div class="d-flex flex-column gap-3">
-                
+                <!-- Die Schleife baut die Liste automatisch aus den Python-Daten auf -->
                 {% for habit in gewohnheiten %}
                 <div class="p-3 border d-flex justify-content-between align-items-center habit-item bg-light">
                     <div>
                         <span class="fs-5 fw-semibold text-dark">{{ habit.name }}</span>
                     </div>
                     <div class="d-flex align-items-center gap-3">
-                        
+                        <!-- Anzeige der Erfolgssträhne (Streak) mit einem Feuer-Icon -->
                         <span class="badge streak-badge px-3 py-2 fs-6">
                             <i class="bi bi-fire text-danger me-1"></i>{{ habit.streak }}
                         </span>
-                        
-                        <button class="btn btn-sm btn-primary rounded-pill px-3">
-                            <i class="bi bi-check-lg"></i>
-                        </button>
+                        <!-- Formular-Button zum Erledigen der Gewohnheit -->
+                        <form action="/check/{{ habit.id }}" method="POST" class="m-0">
+                            <button type="submit" class="btn btn-sm btn-outline-success rounded-pill px-3">
+                                <i class="bi bi-check-lg"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
                 {% endfor %}
             </div>
+
         </div>
     </div>
 
