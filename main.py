@@ -7,8 +7,16 @@ from fastapi.templating import Jinja2Templates
 app = FastAPI(title="Gewohnheits-Tracker API")
 
 
+
 current_dir = os.path.dirname(os.path.abspath(__file__))
-templates = Jinja2Templates(directory=os.path.join(current_dir, "templates"))
+templates_dir = os.path.join(current_dir, "templates")
+
+
+if not os.path.exists(templates_dir):
+    templates_dir = "templates"
+
+templates = Jinja2Templates(directory=templates_dir)
+
 
 # Temporäre In-Memory-Datenbank für die Gewohnheiten
 gewohnheiten = [
