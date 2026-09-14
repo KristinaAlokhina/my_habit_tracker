@@ -4,17 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Habit Tracker</title>
-    <!-- Bootstrap für modernes Design -->
+    
     <link href="https://jsdelivr.net" rel="stylesheet">
+    
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <style>
+        body { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .tracker-card { border-radius: 16px; border: none; box-shadow: 0 8px 24px rgba(0,0,0,0.04); }
+        .habit-item { border-radius: 12px; transition: transform 0.2s; }
+        .habit-item:hover { transform: translateY(-2px); }
+        .streak-badge { background-color: #fff3cd; color: #856404; font-weight: bold; border-radius: 20px; }
+    </style>
 </head>
-<body class="bg-light">
+<body>
 
-    <div class="container py-5" style="max-width: 600px;">
-        <h1 class="text-center mb-4 text-primary fw-bold">Mein Gewohnheitstracker</h1>
+    <div class="container py-5" style="max-width: 550px;">
         
-        <!-- Info-Box (wird später durch die Liste ersetzt) -->
-        <div class="alert alert-info text-center">
-            Das Interface wurde erfolgreich erstellt! Bald werden hier Ihre Gewohnheiten angezeigt.
+        <div class="text-center mb-5">
+            <h1 class="fw-bold text-dark"><i class="bi bi-check2-circle text-primary me-2"></i>Habit Tracker</h1>
+            <p class="text-muted">Verfolge deine täglichen Gewohnheiten</p>
+        </div>
+        
+        
+        <div class="card p-4 tracker-card bg-white">
+            <h5 class="card-title fw-bold mb-4 text-secondary">Meine Gewohnheiten</h5>
+            
+            <div class="d-flex flex-column gap-3">
+                
+                {% for habit in gewohnheiten %}
+                <div class="p-3 border d-flex justify-content-between align-items-center habit-item bg-light">
+                    <div>
+                        <span class="fs-5 fw-semibold text-dark">{{ habit.name }}</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        
+                        <span class="badge streak-badge px-3 py-2 fs-6">
+                            <i class="bi bi-fire text-danger me-1"></i>{{ habit.streak }}
+                        </span>
+                        
+                        <button class="btn btn-sm btn-primary rounded-pill px-3">
+                            <i class="bi bi-check-lg"></i>
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
