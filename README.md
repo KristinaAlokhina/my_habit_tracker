@@ -34,6 +34,7 @@
 Die Anwendung bietet eine ansprechende HTML-Benutzeroberfläche und wird vollautomatisch in einer isolierten Docker-Umgebung ausgeführt.
 
 ### 🌐 Live Demo
+⚠️ Hinweis: Da das Projekt auf einem kostenlosen Server gehostet wird, kann das Laden beim ersten Öffnen ca. 50 Sekunden dauern (Server-Wake-up-Zeit). Bitte haben Sie ein wenig Geduld.
 Die Anwendung ist live auf Render verfügbar:  
 👉 **[https://my-habit-tracker-ohs1.onrender.com](https://my-habit-tracker-ohs1.onrender.com)**
 
@@ -88,6 +89,7 @@ Die Anwendung ist danach lokal unter **[http://localhost:8000](http://localhost:
 A modern, lightweight, and interactive web application to track your daily routines built with **Python** and **FastAPI**. It includes a beautiful HTML user interface and deploys automatically within an isolated Docker container.
 
 ### 🌐 Live Demo
+⚠️ Note: Since the project is hosted on a free tier instance, the initial loading may take about 50 seconds (server spin-up time). Please wait a moment.
 The application is live on Render:  
 👉 **[https://my-habit-tracker-ohs1.onrender.com](https://my-habit-tracker-ohs1.onrender.com)**
 
