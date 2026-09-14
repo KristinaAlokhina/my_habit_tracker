@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
@@ -5,8 +6,9 @@ from fastapi.templating import Jinja2Templates
 # Initialisierung der FastAPI-App mit einem deutschen Titel
 app = FastAPI(title="Gewohnheits-Tracker API")
 
-# Konfiguration des Ordners für die HTML-Templates
-templates = Jinja2Templates(directory="templates")
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+templates = Jinja2Templates(directory=os.path.join(current_dir, "templates"))
 
 # Temporäre In-Memory-Datenbank für die Gewohnheiten
 gewohnheiten = [
