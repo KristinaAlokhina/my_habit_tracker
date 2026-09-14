@@ -1,43 +1,75 @@
-# Gewohnheits-Tracker API (Habit Tracker REST-API)
+<p align="center">
+  <img src="https://shields.io" alt="Version">
+  <img src="https://shields.io" alt="Python">
+  <img src="https://shields.io" alt="FastAPI">
+  <img src="https://shields.io" alt="Docker">
+  <img src="https://shields.io" alt="Bootstrap">
+</p>
+
+---
 
 <p align="center">
-  <a href="#-deutsch">Deutsch</a> • 
-  <a href="#-english">English</a>
+  <ins><b><kbd>&nbsp;WEB APPLICATION&nbsp;</kbd></b></ins>
+</p>
+
+<h1 align="center" style="font-size: 2.5rem; font-weight: 900; color: #1a1a1a; margin-top: 10px; margin-bottom: 10px; border-bottom: none;">
+  🎯 GEWOHNHEITS-TRACKER (HABIT TRACKER)
+</h1>
+
+<p align="center">
+  <strong>Ein eleganter, performanter und responsiver Web-Tracker zur Verwaltung täglicher Routinen.</strong>
+  <br />
+  <i>Entwickelt mit Python, FastAPI und verpackt in ein modernes Premium-UI.</i>
+</p>
+
+<p align="center">
+  <a href="#-deutsch">🇩🇪 Deutsch</a> • 
+  <a href="#-english">🇺🇸 English</a>
 </p>
 
 ---
 
 ## 🇩🇪 Deutsch
 
+Die Anwendung bietet eine ansprechende HTML-Benutzeroberfläche und wird vollautomatisch in einer isolierten Docker-Umgebung ausgeführt.
+
+### 🌐 Live Demo
+Die Anwendung ist live auf Render verfügbar:  
+👉 **[https://my-habit-tracker-ohs1.onrender.com](https://my-habit-tracker-ohs1.onrender.com)**
+
 ### 🚀 Funktionen
-* **Strukturierte Datenausgabe**: Vollständige Bereitstellung aller Gewohnheiten und aktuellen Streaks (Erfolgsserien) im standardisierten JSON-Format.
-* **Automatische Dokumentation**: Integrierte, interaktive Swagger UI Dokumentation, die ein direktes Testen der API-Endpunkte im Browser ermöglicht.
-* **Vollständige Dockerisierung**: Isolierte und plattformunabhängige Laufzeitumgebung, die ohne lokale Python- oder Bibliotheks-Installationen auskommt.
-* **Clean Code & Lokalisierung**: Konsistente Umsetzung von Clean-Code-Prinzipien mit durchgehend deutscher Benennung, Struktur und Quellcode-Kommentierung.
+* **Interaktive Benutzeroberfläche**: Ein sauberes, modernes HTML-Interface (Bootstrap 5) zur Verwaltung deiner Gewohnheiten im Webbrowser.
+* **Dynamische Verwaltung**: Neue Gewohnheiten können direkt über ein Formular hinzugefügt werden.
+* **Streak-Zähler 🔥**: Mit einem Klick auf den Erledigt-Haken (`✓`) wird deine tägliche Erfolgsserie (Streak) in Echtzeit erhöht.
+* **Automatische API-Dokumentation**: Integrierte interaktive Swagger UI Dokumentation zur Analyse der Routen.
+* **Vollständige Dockerisierung**: Isolierte Laufzeitumgebung, die plattformunabhängig ohne lokale Python-Installationen startet.
+* **Clean Code**: Strukturierte Architektur nach Clean-Code-Prinzipien mit durchgehender deutscher Dokumentation und Quellcode-Kommentierung.
 
 ### 🛠️ Technologien
-* Python 3.11
-* Web-Framework: **FastAPI** (modernes, hochperformantes asynchrones Framework)
-* Server: **Uvicorn** (ASGI-Server-Implementierung)
-* Containerisierung: **Docker**
+* **Backend**: Python 3.11, FastAPI (Asynchrones Hochperformanz-Framework)
+* **Frontend**: HTML5, Jinja2 Templates, Bootstrap 5 & Bootstrap Icons
+* **Server**: Uvicorn (ASGI-Server)
+* **Containerisierung**: Docker & Docker Compose
 
-### 📂 Struktur der Benutzeroberfläche / API
-Die Anwendung läuft als Hintergrunddienst (Webserver) и bietet folgende Einstiegspunkte:
-* **Hauptseite**: `GET /` — Gibt eine standardisierte Willkommensnachricht zurück.
-* **Gewohnheiten-Übersicht**: `GET /gewohnheiten` — Liefert eine dynamische Liste aller getrackten Aktivitäten inklusive IDs und Streaks.
-* **Swagger-Interface**: `GET /docs` — Das interaktive Kontrollzentrum zur Analyse der API.
+### 📂 Struktur der Anwendung & Endpunkte
+Der Webserver stellt folgende funktionale Einstiegspunkte bereit:
+* **`GET /` (Hauptseite)**: Das visuelle Kontrollzentrum mit der Übersicht aller Gewohnheiten und dem Formular.
+* **`GET /gewohnheiten`**: Liefert die rohen Daten aller Aktivitäten im standardisierten JSON-Format.
+* **`POST /add`**: Endpunkt zur Verarbeitung und Speicherung neu angelegter Gewohnheiten.
+* **`POST /check/{habit_id}`**: Erhöht die Erfolgsserie (Streak) einer spezifischen Gewohnheit um einen Tag.
+* **`GET /docs`**: Die interaktive Swagger-UI-Testumgebung für Entwickler.
 
 ### 📦 Installation & Ausführung
 
 #### Option 1: Starten über Docker (Empfohlen)
-Für die Ausführung wird lediglich eine installierte Docker-Umgebung benötigt:
+Es wird lediglich eine installierte Docker-Umgebung benötigt:
 1. Repository klonen:
    ```bash
    git clone https://github.com/KristinaAlokhina/my_habit_tracker
    ```
 2. In den Projektordner wechseln:
    ```bash
-   cd gewohnheits-tracker
+   cd my_habit_tracker
    ```
 3. Docker-Image bauen:
    ```bash
@@ -47,41 +79,51 @@ Für die Ausführung wird lediglich eine installierte Docker-Umgebung benötigt:
    ```bash
    docker run -p 8000:8000 gewohnheits-tracker
    ```
-Die Anwendung ist danach unter `[http://localhost:8000/gewohnheiten](https://my-habit-tracker-ohs1.onrender.com/docs)` erreichbar.
+Die Anwendung ist danach lokal unter **[http://localhost:8000](http://localhost:8000)** erreichbar.
 
 ---
 
 ## 🇺🇸 English
 
+A modern, lightweight, and interactive web application to track your daily routines built with **Python** and **FastAPI**. It includes a beautiful HTML user interface and deploys automatically within an isolated Docker container.
+
+### 🌐 Live Demo
+The application is live on Render:  
+👉 **[https://my-habit-tracker-ohs1.onrender.com](https://my-habit-tracker-ohs1.onrender.com)**
+
 ### 🚀 Features
-* **Structured Data Output**: Complete delivery of all daily habits and active streaks formatted in standardized JSON.
-* **Automated Documentation**: Native integration with Swagger UI, allowing direct interaction and testing of all endpoints from the browser.
-* **Full Containerization**: Completely isolated and platform-independent Docker environment, requiring no local Python setups on the host machine.
-* **Clean Code Architecture**: High-quality codebase strictly adhering to naming standards, structured routing, and detailed code documentation.
+* **Interactive UI**: A clean and modern responsive web interface (Bootstrap 5) for managing daily routines directly inside the browser.
+* **Dynamic Content Creation**: Add new habits instantly through a simple and clear form field.
+* **Streak Tracker 🔥**: Click the complete button (`✓`) to boost your daily active streak instantly in real-time.
+* **Automated Documentation**: Native integration with Swagger UI, allowing direct interactive endpoint testing.
+* **Full Containerization**: Completely isolated and platform-independent Docker environment requiring no local host setups.
+* **Clean Code Architecture**: High-quality codebase strictly adhering to clean design principles and detailed code documentation.
 
 ### 🛠️ Technologies
-* Python 3.11
-* Web Framework: **FastAPI** (modern, high-performance asynchronous framework)
-* Server: **Uvicorn** (ASGI server)
-* Containerization: **Docker**
+* **Backend**: Python 3.11, FastAPI (High-performance asynchronous framework)
+* **Frontend**: HTML5, Jinja2 Template Engine, Bootstrap 5 & Bootstrap Icons
+* **Server**: Uvicorn (ASGI server implementation)
+* **Containerization**: Docker
 
-### 📂 API & Endpoint Structure
-The application runs as a web service and exposes the following functional access points:
-* **Root Endpoint**: `GET /` — Returns a standardized API welcome message.
-* **Habits Overview**: `GET /gewohnheiten` — Serves a dynamic list of tracked activities containing individual item IDs and streak records.
-* **Swagger Interface**: `GET /docs` — An interactive control panel for visual exploration and live testing of the backend service.
+### 📂 Application & Endpoint Structure
+The running web service exposes the following functional access points:
+* **`GET /` (Root Endpoint)**: Serves the visual frontend dashboard displaying active habits and forms.
+* **`GET /gewohnheiten`**: Delivers raw data of all activities formatted in standardized JSON.
+* **`POST /add`**: Endpoint handling safe submittal and validation of incoming user habits.
+* **`POST /check/{habit_id}`**: Route increments active streaks of selected records by 1 unit.
+* **`GET /docs`**: An interactive Swagger control panel for backend service analysis.
 
 ### 📦 Installation & Setup
 
 #### Option 1: Run with Docker (Recommended)
-Only a local Docker installation is required to deploy this application:
+Only a local Docker installation is required to deploy this service:
 1. Clone the repository:
    ```bash
    git clone https://github.com/KristinaAlokhina/my_habit_tracker
    ```
 2. Navigate to the project directory:
    ```bash
-   cd gewohnheits-tracker
+   cd my_habit_tracker
    ```
 3. Build the Docker image:
    ```bash
@@ -91,4 +133,9 @@ Only a local Docker installation is required to deploy this application:
    ```bash
    docker run -p 8000:8000 gewohnheits-tracker
    ```
-The application will be live at `[http://localhost:8000/gewohnheiten](https://my-habit-tracker-ohs1.onrender.com/docs)`."# my_habit_tracker" 
+The application will be live at **[http://localhost:8000](http://localhost:8000)**.
+
+---
+<p align="center">
+  Proudly developed by <a href="https://github.com/KristinaAlokhina">KristinaAlokhina</a> • © 2026
+</p>
