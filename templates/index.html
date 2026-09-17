@@ -4,66 +4,330 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Habit Tracker</title>
-    <!-- Integration von Bootstrap für ein modernes und sauberes Design -->
-    <link href="https://jsdelivr.net" rel="stylesheet">
-    <!-- Integration von Bootstrap Icons für visuelle Elemente (Feuer, Haken) -->
-    <link href="https://jsdelivr.net" rel="stylesheet">
     <style>
-        body { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .tracker-card { border-radius: 16px; border: none; box-shadow: 0 8px 24px rgba(0,0,0,0.04); }
-        .habit-item { border-radius: 12px; transition: transform 0.2s; }
-        .habit-item:hover { transform: translateY(-2px); }
-        .streak-badge { background-color: #fff3cd; color: #856404; font-weight: bold; border-radius: 20px; }
+        :root {
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --accent-color: #4caf50;
+            --accent-hover: #45a049;
+            --danger-color: #f44336;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .tracker-container {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            font-size: 15px;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        /* Formular zum Hinzufügen */
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--accent-color);
+        }
+
+        button.add-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button.add-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Gewohnheiten-Liste */
+        .habit-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .habit-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fafafa;
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .habit-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .habit-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        /* Benutzerdefinierte Checkbox */
+        .checkbox-container {
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+        }
+
+        .checkbox-container input {
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 24px;
+            width: 24px;
+            background-color: #eee;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .checkbox-container:hover input ~ .checkmark {
+            background-color: #ccc;
+        }
+
+        .checkbox-container input:checked ~ .checkmark {
+            background-color: var(--accent-color);
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 9px;
+            top: 5px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .checkbox-container input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .habit-name {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .habit-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .streak-count {
+            font-size: 15px;
+            font-weight: bold;
+            background: #eee;
+            padding: 4px 10px;
+            border-radius: 12px;
+            color: var(--text-muted);
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .habit-item.completed .streak-count {
+            background: #e8f5e9;
+            color: var(--accent-color);
+        }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #ccc;
+            font-size: 22px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0 5px;
+            transition: color 0.2s;
+        }
+
+        .delete-btn:hover {
+            color: var(--danger-color);
+        }
     </style>
 </head>
 <body>
 
-    <div class="container py-5" style="max-width: 550px;">
-        <!-- Kopfbereich der Webseite -->
-        <div class="text-center mb-5">
-            <h1 class="fw-bold text-dark"><i class="bi bi-check2-circle text-primary me-2"></i>Habit Tracker</h1>
-            <p class="text-muted">Verfolge deine täglichen Gewohnheiten einfach und übersichtlich</p>
-        </div>
-        
-        <!-- Hauptbereich mit den Funktionen -->
-        <div class="card p-4 tracker-card bg-white">
-            
-            <!-- Formular zum Hinzufügen einer neuen Gewohnheit -->
-            <h5 class="card-title fw-bold mb-3 text-secondary">Neue Gewohnheit hinzufügen</h5>
-            <form action="/add" method="POST" class="d-flex gap-2 mb-4">
-                <input type="text" name="name" class="form-control form-control-lg bg-light border-0" placeholder="z.B. 2 Liter Wasser trinken..." required>
-                <button type="submit" class="btn btn-primary px-4 fw-bold">Hinzufügen</button>
-            </form>
+<div class="tracker-container">
+    <h1>Habit Tracker</h1>
+    <div class="subtitle">Verfolge deine täglichen Gewohnheiten einfach und übersichtlich</div>
 
-            <hr class="text-muted my-4">
-
-            <!-- Liste der bestehenden Gewohnheiten -->
-            <h5 class="card-title fw-bold mb-3 text-secondary">Meine aktuellen Gewohnheiten</h5>
-            <div class="d-flex flex-column gap-3">
-                <!-- Die Schleife baut die Liste automatisch aus den Python-Daten auf -->
-                {% for habit in gewohnheiten %}
-                <div class="p-3 border d-flex justify-content-between align-items-center habit-item bg-light">
-                    <div>
-                        <span class="fs-5 fw-semibold text-dark">{{ habit.name }}</span>
-                    </div>
-                    <div class="d-flex align-items-center gap-3">
-                        <!-- Anzeige der Erfolgssträhne (Streak) mit einem Feuer-Icon -->
-                        <span class="badge streak-badge px-3 py-2 fs-6">
-                            <i class="bi bi-fire text-danger me-1"></i>{{ habit.streak }}
-                        </span>
-                        <!-- Formular-Button zum Erledigen der Gewohnheit -->
-                        <form action="/check/{{ habit.id }}" method="POST" class="m-0">
-                            <button type="submit" class="btn btn-sm btn-outline-success rounded-pill px-3">
-                                <i class="bi bi-check-lg"></i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-
-        </div>
+    <h3>Neue Gewohnheit hinzufügen</h3>
+    <div class="input-group">
+        <input type="text" id="habit-input" placeholder="z.B. 2 Liter Wasser trinken.." autocomplete="off">
+        <button class="add-btn" id="add-btn">Hinzufügen</button>
     </div>
+
+    <h3>Meine aktuellen Gewohnheiten</h3>
+    <div class="habit-list" id="habit-list">
+        <!-- Gewohnheiten werden hier dynamisch per JavaScript eingefügt -->
+    </div>
+</div>
+
+<script>
+    // DOM-Elemente abrufen
+    const habitInput = document.getElementById('habit-input');
+    const addBtn = document.getElementById('add-btn');
+    const habitList = document.getElementById('habit-list');
+
+    // Gewohnheiten aus dem LocalStorage laden oder Standardwerte setzen
+    let habits = JSON.parse(localStorage.getItem('habits')) || [
+        { id: 1, name: '1 Stunde programmieren', streak: 5, completed: false },
+        { id: 2, name: 'Deutsche Vokabeln lernen', streak: 12, completed: false },
+        { id: 3, name: 'Sport treiben', streak: 3, completed: false }
+    ];
+
+    // Daten im LocalStorage des Browsers speichern
+    function saveToLocalStorage() {
+        localStorage.setItem('habits', JSON.stringify(habits));
+    }
+
+    // Gewohnheiten auf der Seite rendern
+    function renderHabits() {
+        habitList.innerHTML = '';
+
+        habits.forEach(habit => {
+            const habitItem = document.createElement('div');
+            habitItem.className = `habit-item ${habit.completed ? 'completed' : ''}`;
+
+            habitItem.innerHTML = `
+                <div class="habit-left">
+                    <label class="checkbox-container">
+                        <input type="checkbox" ${habit.completed ? 'checked' : ''} onchange="toggleHabit(${habit.id})">
+                        <span class="checkmark"></span>
+                    </label>
+                    <span class="habit-name">${habit.name}</span>
+                </div>
+                <div class="habit-right">
+                    <span class="streak-count">${habit.streak}</span>
+                    <button class="delete-btn" onclick="deleteHabit(${habit.id})">&times;</button>
+                </div>
+            `;
+
+            habitList.appendChild(habitItem);
+        });
+    }
+
+    // Eine neue Gewohnheit hinzufügen
+    function addHabit() {
+        const text = habitInput.value.trim();
+        if (text === '') return;
+
+        const newHabit = {
+            id: Date.now(), // Eindeutige ID über Zeitstempel
+            name: text,
+            streak: 0,
+            completed: false
+        };
+
+        habits.push(newHabit);
+        saveToLocalStorage();
+        renderHabits();
+        habitInput.value = ''; // Eingabefeld leeren
+    }
+
+    // Status der Checkbox umschalten (Erledigt / Nicht erledigt)
+    window.toggleHabit = function(id) {
+        habits = habits.map(habit => {
+            if (habit.id === id) {
+                const newStatus = !habit.completed;
+                return {
+                    ...habit,
+                    completed: newStatus,
+                    // Erhöht den Streak um 1 bei Aktivierung, verringert ihn bei Deaktivierung
+                    streak: newStatus ? habit.streak + 1 : Math.max(0, habit.streak - 1)
+                };
+            }
+            return habit;
+        });
+        saveToLocalStorage();
+        renderHabits();
+    }
+
+    // Eine Gewohnheit löschen
+    window.deleteHabit = function(id) {
+        habits = habits.filter(habit => habit.id !== id);
+        saveToLocalStorage();
+        renderHabits();
+    }
+
+    // Event-Listener für Button-Klick und Enter-Taste
+    addBtn.addEventListener('click', addHabit);
+    habitInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') addHabit();
+    });
+
+    // Erster Aufruf beim Laden der Seite
+    renderHabits();
+</script>
 
 </body>
 </html>
