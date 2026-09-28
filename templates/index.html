@@ -260,10 +260,11 @@
 
             habitItem.innerHTML = `
                 <div class="habit-left">
-                    <label class="checkbox-container">
-                        <input type="checkbox" ${habit.completed ? 'checked' : ''} onchange="toggleHabit(${habit.id})">
-                        <span class="checkmark"></span>
-                    </label>
+                    <div class="counter-container" style="display: flex; align-items: center; gap: 8px; margin-right: 15px; background: #f0f0f0; padding: 2px 8px; border-radius: 20px;">
+                    <button class="counter-btn" onclick="changeCount(${habit.id}, -1)" style="border: none; background: none; font-weight: bold; cursor: pointer; padding: 0 5px;">-</button>
+                    <span class="counter-value" style="font-weight: bold; min-width: 15px; text-align: center; font-size: 0.95rem; color: #333;">${habit.completed}</span>
+                    <button class="counter-btn" onclick="changeCount(${habit.id}, 1)" style="border: none; background: none; font-weight: bold; cursor: pointer; padding: 0 5px;">+</button>
+                </div>
                     <span class="habit-name">${habit.name}</span>
                 </div>
                 <div class="habit-right">
@@ -285,7 +286,7 @@
             id: Date.now(), // Eindeutige ID über Zeitstempel
             name: text,
             streak: 0,
-            completed: false
+            completed: 0
         };
 
         habits.push(newHabit);
@@ -295,22 +296,22 @@
     }
 
     // Status der Checkbox umschalten (Erledigt / Nicht erledigt)
-    window.toggleHabit = function(id) {
-        habits = habits.map(habit => {
-            if (habit.id === id) {
-                const newStatus = !habit.completed;
-                return {
-                    ...habit,
-                    completed: newStatus,
-                    // Erhöht den Streak um 1 bei Aktivierung, verringert ihn bei Deaktivierung
-                    streak: newStatus ? habit.streak + 1 : Math.max(0, habit.streak - 1)
-                };
-            }
-            return habit;
-        });
-        saveToLocalStorage();
-        renderHabits();
-    }
+    window.changeCount = function(id, change) {
+    habits = habits.map(habit => {
+        if (habit.id === id) {
+            let newCount = habit.completed + change;
+            if (newCount < 0) newCount = 0; 
+            return {
+                ...habit,
+                completed: newCount
+            };
+        }
+        return habit;
+    });
+    saveToLocalStorage();
+    renderHabits();
+}
+
 
     // Eine Gewohnheit löschen
     window.deleteHabit = function(id) {
