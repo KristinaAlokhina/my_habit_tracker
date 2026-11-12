@@ -68,6 +68,13 @@ def neue_gewohnheit_hinzufuegen(name: str = Form(...)):
   })
   return RedirectResponse(url="/", status_code=303)
 
+@app.post("/delete/{habit_id}")
+def gewohnheit_loeschen(habit_id: int):
+  """Löscht eine Gewohnheit anhand ihrer ID."""
+  global gewohnheiten
+  gewohnheiten = [h for h in gewohnheiten if h["id"] != habit_id]
+  return RedirectResponse(url="/", status_code=303)
+
 
 @app.post("/check/{habit_id}")
 def gewohnheit_erledigen(habit_id: int):
