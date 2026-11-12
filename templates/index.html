@@ -156,6 +156,21 @@
             background-color: var(--accent-color);
             color: white;
         }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #ccc;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 0 5px;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .delete-btn:hover {
+            color: var(--danger-color);
+        }
     </style>
 </head>
 <body>
@@ -187,6 +202,11 @@
                 <!-- Button ruft den Python-Endpoint /check/{id} auf -->
                 <form action="/check/{{ habit.id }}" method="POST" style="margin: 0;">
                     <button type="submit" class="check-btn">Erledigt</button>
+                </form>
+
+                <!-- Button ruft den Python-Endpoint /delete/{id} auf -->
+                <form action="/delete/{{ habit.id }}" method="POST" style="margin: 0;">
+                    <button type="submit" class="delete-btn" title="Löschen">&times;</button>
                 </form>
             </div>
         </div>
