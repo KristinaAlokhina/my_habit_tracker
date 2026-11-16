@@ -1,30 +1,20 @@
-
 <p align="center">
-  <ins><b><kbd>&nbsp;DESKTOP APPLICATION · v3.1.0&nbsp;</kbd></b></ins>
+  <ins><b><kbd>&nbsp;WEB APPLICATION&nbsp;</kbd></b></ins>
 </p>
 
 <h1 align="center" style="font-size: 2.5rem; font-weight: 900; color: #1a1a1a; margin-top: 10px; margin-bottom: 10px; border-bottom: none;">
-  🎯 DOWNLOAD ORGANIZER
+  🎯 GEWOHNHEITS-TRACKER (HABIT TRACKER)
 </h1>
 
 <p align="center">
-  <strong>A smarter way to organize your downloads.</strong>
+  <strong>Ein eleganter, performanter und responsiver Web-Tracker zur Verwaltung täglicher Routinen.</strong>
   <br />
-  <i>A lightweight desktop application built with Python and Tkinter, featuring automated file sorting, background monitoring, and a clean graphical interface.</i>
+  <i>Entwickelt mit Python, FastAPI und verpackt in ein modernes, interaktives Premium-UI.</i>
 </p>
 
 <p align="center">
-  <a href="#-deutsch">🇩🇪 Deutsch</a> •
-  <a href="#-english">🇺🇸 English</a> •
-  <a href="#-русский">🇷🇺 Русский</a> •
-  <a href="#-українська">🇺🇦 Українська</a>
-</p>
-
-<p align="center">
-  <kbd>Python</kbd>
-  <kbd>Tkinter</kbd>
-  <kbd>Multithreading</kbd>
-  <kbd>Windows</kbd>
+  <a href="#-deutsch">🇩🇪 Deutsch</a> • 
+  <a href="#-english">🇺🇸 English</a>
 </p>
 
 ---
